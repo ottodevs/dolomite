@@ -3,7 +3,7 @@ import * as userActionCreators from '../actions/action-creators/user-action-crea
 
 describe('reducer', () => {
   const INITIAL_STATE = {
-    userName: 'Default Name'
+    userName: ''
   };
   it('should return the initial state', () => {
     expect(userReducer(undefined, {})).toEqual(INITIAL_STATE);

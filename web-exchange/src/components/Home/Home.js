@@ -22,6 +22,10 @@ export class Home extends React.Component {
     }
   };
 
+  onClearName = () => {
+    this.props.updateUserName('');
+  }
+
   render() {
     return (
       <div className={styles.home}>
@@ -35,7 +39,13 @@ export class Home extends React.Component {
           label="Your Name"
           onKeyPress={ev => this.onKeyPress(ev)}
         />
-        <br /><br />
+
+        { !!this.props.userName && (
+        <Button style={{ marginLeft: 10 }} variant="outlined" color="primary" onClick={this.onClearName}>Clear Name</Button>
+        )}
+
+        <br />
+        <br />
         <Button variant="raised" color="primary" component={AboutPageLink}>About Page</Button>
       </div>
     );
