@@ -1,4 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Override from './core/Override';
 import themeColors from './core/ThemeColors';
 
@@ -8,41 +10,44 @@ require('./overrides');
 
 /*
  * Generates a Custom Material-UI Theme for the Dolomite Web Exchange
- * 
- * Material-UI API reference: https://material-ui.com/customization/themes/
- *
  */
-export default class DolomiteTheme {
-  /*
-   * Run once when the root component loads, and use 
-   * DolomiteTheme.theme() to get an instance of it later
-   *  in theweb application's life cycle
-   * 
-   * @returns an instance of a Material-UI custom theme.
-   */
-  static generate() {
-    DolomiteTheme.generatedTheme = createMuiTheme({
+function getDolomiteTheme() {
+  if (window.generatedTheme == null) {
+    window.generatedTheme = createMuiTheme({
       palette,
       overrides: Override.getOverrides(),
       props: Override.getProps(),
     });
-
-    return DolomiteTheme.generatedTheme;
   }
-
-  /*
-   * Get an instance of the custom material-ui theme.
-   * MUST call DolomiteTheme.generate() at some point prior
-   */
-  static theme() {
-    return DolomiteTheme.generatedTheme;
-  }
-
-  /*
-   * Example Use: DolomiteTheme.colors().primary.main
-   * MUST call DolomiteTheme.generate() at some point prior
-   */
-  static colors() {
-    return themeColors;
-  }
+  return window.generatedTheme;
 }
+
+export default getDolomiteTheme();
+
+/*
+ * Parent component that enables the Dolomite Theme
+ * 
+ * Usage:
+ *
+ * import { DolomiteThemeProvider } from '../../common/theme/DolomiteTheme';
+ *
+ * <DolomiteThemeProvider>  ... Rest of App ...  </DolomiteThemeProvider
+ */
+export const DolomiteThemeProvider = props => (
+  <MuiThemeProvider theme={getDolomiteTheme()}>
+    {props.children}
+  </MuiThemeProvider>
+);
+
+DolomiteThemeProvider.propTypes = { children: PropTypes.element.isRequired };
+
+/*
+ * Get the Dolomite Theme color palette
+ *
+ * Usage: 
+ *
+ * import { DolomiteColors as colors } from '../../common/theme/DolomiteTheme';
+ * { color: colors.primary.main }
+ *
+ */
+export const DolomiteColors = themeColors;

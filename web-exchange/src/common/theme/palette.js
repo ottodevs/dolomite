@@ -8,13 +8,15 @@
  * (https://material-ui.com/customization/themes/#palette)
  */
 
-export default {
+const palette = {
   primary: {
     // light: will be calculated from palette.primary.main,
     main: '#3170A3',
     // dark: will be calculated from palette.primary.main,
   },
   secondary: {
-    main: '#909'
+    main: '#ddd'
   },
 };
+
+export default palette;

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+
 import logo from '../../assets/DolomiteLogoCircle.png';
 import styles from './Home.scss';
 import TokenValues from '../TokenValues/TokenValues';
@@ -33,6 +34,7 @@ export class Home extends React.Component {
         <h1 className={styles.title}>
           Welcome to the Dolomite Web Exchange, {this.props.userName}!
         </h1>
+
         <h2>Here are the values of tokens in USD</h2>
         <TokenValues tokenToUsd={this.props.tokenToUsd} />
         <TextField
