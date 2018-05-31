@@ -16,9 +16,4 @@ import COLOR_PALETTE from '../color-palette';
  * MuiTheme with ONLY the colors (no overrides) and makes the generated enhanced palette
  * available to the overrides.
  */
-function getThemePalette() {
-  if (window.paletteTheme == null) window.paletteTheme = createMuiTheme({ palette: COLOR_PALETTE });
-  return window.paletteTheme.palette;
-}
-
-export default getThemePalette();
+export default createMuiTheme({ palette: COLOR_PALETTE }).palette;
