@@ -26,10 +26,10 @@ export default getDolomiteTheme();
 
 /*
  * Parent component that enables the Dolomite Theme
- * 
+ *
  * Usage:
  *
- * import { DolomiteThemeProvider } from '../../common/theme/DolomiteTheme';
+ * import { DolomiteThemeProvider } from 'path/to/.../theme/DolomiteTheme';
  *
  * <DolomiteThemeProvider>  ... Rest of App ...  </DolomiteThemeProvider
  */
@@ -44,9 +44,9 @@ DolomiteThemeProvider.propTypes = { children: PropTypes.element.isRequired };
 /*
  * Get the Dolomite Theme color palette
  *
- * Usage: 
+ * Usage:
  *
- * import { DolomiteColors as colors } from '../../common/theme/DolomiteTheme';
+ * import { DolomiteColors as colors } from 'path/to/.../theme/DolomiteTheme';
  * { color: colors.primary.main }
  *
  */
