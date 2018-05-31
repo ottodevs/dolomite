@@ -67,12 +67,16 @@ In the `overrides.js` file...
 
 ```javascript
 // (1) Import overridden components
-import Button from './overrides/buttons/Button';
-import Input from './overrides/inputs/Input';
+import Button from './components/Buttons/Button';
+import Input from './components/Inputs/Input';
 
 // (2) Register overridden components
-Override.add(Button);
-Override.add(Input);
+const overrides = [
+  Button,
+  Input
+];
+
+export default overrides;
 ```
 
 #### That's it!

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import Override from './core/Override';
+
+import Override, { generateOverrides, generateProps } from './core/Override';
 import themeColors from './core/ThemeColors';
 
-import palette from './palette.js';
-
-require('./overrides');
+import palette from './palette';
+import overrides from './overrides';
 
 /*
  * Generates a Custom Material-UI Theme for the Dolomite Web Exchange
@@ -15,8 +15,8 @@ function getDolomiteTheme() {
   if (window.generatedTheme == null) {
     window.generatedTheme = createMuiTheme({
       palette,
-      overrides: Override.getOverrides(),
-      props: Override.getProps(),
+      overrides: generateOverrides(overrides),
+      props: generateProps(overrides),
     });
   }
   return window.generatedTheme;

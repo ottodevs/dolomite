@@ -1,5 +1,3 @@
-import Override from './core/Override';
-
 /*
  * overrides.js
  *
@@ -14,5 +12,9 @@ import Button from './components/Buttons/Button';
 import Input from './components/Inputs/Input';
 
 // (2) Register overridden components
-Override.add(Button);
-Override.add(Input);
+const overrides = [
+  Button,
+  Input
+];
+
+export default overrides;

@@ -2,7 +2,7 @@
 
 ## Material UI Theme
 
-The code for the Material UI Custom Theme is in `src/common/theme` and for more information on how to override the styles of material-ui components in this project, reference the [Theme Read Me](src/common/theme/ThemeReadMe.md).
+The code for the Material UI Custom Theme is in `src/common/theme` and for more information on how to override the styles of material-ui components in this project, reference the [Theme Read Me](src/common/theme/).
 
 # React.js Getting Started Guide
 
