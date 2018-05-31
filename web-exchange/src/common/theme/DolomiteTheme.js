@@ -8,21 +8,13 @@ import themeColors from './core/ThemeColors';
 import palette from './palette';
 import overrides from './overrides';
 
-/*
- * Generates a Custom Material-UI Theme for the Dolomite Web Exchange
- */
-function getDolomiteTheme() {
-  if (window.generatedTheme == null) {
-    window.generatedTheme = createMuiTheme({
-      palette,
-      overrides: generateOverrides(overrides),
-      props: generateProps(overrides),
-    });
-  }
-  return window.generatedTheme;
-}
+const MUI_THEME = createMuiTheme({
+  palette,
+  overrides: generateOverrides(overrides),
+  props: generateProps(overrides),
+});
 
-export default getDolomiteTheme();
+const ThemeContext = React.createContext(MUI_THEME);
 
 /*
  * Parent component that enables the Dolomite Theme
@@ -34,9 +26,15 @@ export default getDolomiteTheme();
  * <DolomiteThemeProvider>  ... Rest of App ...  </DolomiteThemeProvider
  */
 export const DolomiteThemeProvider = props => (
-  <MuiThemeProvider theme={getDolomiteTheme()}>
-    {props.children}
-  </MuiThemeProvider>
+  <ThemeContext.Provider value={MUI_THEME}>
+    <ThemeContext.Consumer>
+      { theme => (
+        <MuiThemeProvider theme={theme}>
+          {props.children}
+        </MuiThemeProvider>)
+      }
+    </ThemeContext.Consumer>
+  </ThemeContext.Provider>
 );
 
 DolomiteThemeProvider.propTypes = { children: PropTypes.element.isRequired };
