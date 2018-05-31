@@ -1,5 +1,5 @@
 /*
- * overrides.js
+ * component-overrides.js
  *
  * Import your override objects/files and then add them to the exported array
  *
@@ -11,9 +11,9 @@ import Button from './components/Buttons/Button';
 import Input from './components/Inputs/Input';
 
 // (2) Register overridden components
-const overrides = [
+const COMPONENT_OVERRIDES = [
   Button,
   Input
 ];
 
-export default overrides;
+export default COMPONENT_OVERRIDES;

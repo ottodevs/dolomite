@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import themePalette from '../palette';
+import COLOR_PALETTE from '../color-palette';
 
 /*
  * When in building component override, use:
@@ -17,7 +17,7 @@ import themePalette from '../palette';
  * available to the overrides.
  */
 function getThemePalette() {
-  if (window.paletteTheme == null) window.paletteTheme = createMuiTheme({ palette: themePalette });
+  if (window.paletteTheme == null) window.paletteTheme = createMuiTheme({ palette: COLOR_PALETTE });
   return window.paletteTheme.palette;
 }
 

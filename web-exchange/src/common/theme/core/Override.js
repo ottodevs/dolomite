@@ -14,7 +14,7 @@ export default class Override {
 /*
  * Generate MuiTheme `override` hash from array of Override instances
  */
-export function generateOverrides(overrides) {
+export function generateStyleOverrides(overrides) {
   const styles = {};
   for (let i = 0; i < overrides.length; i += 1) {
     const override = overrides[i];

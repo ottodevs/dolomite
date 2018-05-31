@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-import { generateOverrides, generateProps } from './core/Override';
+import { generateStyleOverrides, generateProps } from './core/Override';
 import themeColors from './core/ThemeColors';
 
-import palette from './palette';
-import overrides from './overrides';
+import COLOR_PALETTE from './color-palette';
+import COMPONENT_OVERRIDES from './component-overrides';
 
-const MUI_THEME = createMuiTheme({
-  palette,
-  overrides: generateOverrides(overrides),
-  props: generateProps(overrides),
+const DOLOMITE_THEME = createMuiTheme({
+  COLOR_PALETTE,
+  overrides: generateStyleOverrides(COMPONENT_OVERRIDES),
+  props: generateProps(COMPONENT_OVERRIDES),
 });
 
-const ThemeContext = React.createContext(MUI_THEME);
+const ThemeContext = React.createContext(DOLOMITE_THEME);
 
 /*
  * Parent component that enables the Dolomite Theme
@@ -26,7 +26,7 @@ const ThemeContext = React.createContext(MUI_THEME);
  * <DolomiteThemeProvider>  ... Rest of App ...  </DolomiteThemeProvider
  */
 export const DolomiteThemeProvider = props => (
-  <ThemeContext.Provider value={MUI_THEME}>
+  <ThemeContext.Provider value={DOLOMITE_THEME}>
     <ThemeContext.Consumer>
       { theme => (
         <MuiThemeProvider theme={theme}>
