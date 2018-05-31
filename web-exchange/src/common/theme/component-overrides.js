@@ -1,10 +1,7 @@
-import Override from './core/Override';
-
 /*
- * overrides.js
+ * component-overrides.js
  *
- * Import your override objects/files and then add them to the Override singleton
- * NOTE: all overrides must be added in this file and only this file
+ * Import your override objects/files and then add them to the exported array
  *
  * Material-UI API reference: https://material-ui.com/customization/themes/
  */
@@ -14,5 +11,9 @@ import Button from './components/Buttons/Button';
 import Input from './components/Inputs/Input';
 
 // (2) Register overridden components
-Override.add(Button);
-Override.add(Input);
+const COMPONENT_OVERRIDES = [
+  Button,
+  Input
+];
+
+export default COMPONENT_OVERRIDES;

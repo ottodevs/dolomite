@@ -15,13 +15,13 @@ const About = (props) => {
     <div />;
 
   return (
-    <div className={styles['left-spacing']}>
+    <div>
       <h1>Welcome to the About Page (and by the way, <b>Routing Works!</b>)</h1>
       <h3>Here is our team:</h3>
       <ul>
         <li>Founders: Corey Caplan &amp; Adam Knuckey</li>
         <li>Marketing: Rene Molinari</li>
-        <li>Project Manager: Jordan Cutler</li>
+        <li>Engineering Manager: Jordan Cutler</li>
         <li>Frontend Engineers: Sam Rogalsky, Zack Rubenstein, and Kai Masters</li>
         <li>Backend Engineers: Gregory Cheng &amp; Matthew Herwig</li>
       </ul>
