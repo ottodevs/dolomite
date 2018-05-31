@@ -1,5 +1,4 @@
-import Override from '../../core/Override';
-import colors from '../../core/ThemeColors';
+import { Override, BaseColorProvider as colors } from '../../core/OverrideHelper';
 
 const styles = {
   root: {

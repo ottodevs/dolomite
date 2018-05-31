@@ -27,8 +27,7 @@ export default COLOR_PALETTE;
 You can do this by creating a new javascript file and exporting a new instance of an `Override`. Example:
 
 ```javascript
-import Override from '../../core/Override';
-import colors from '../../core/ThemeColors';
+import { Override, BaseColorProvider as colors } from '../../core/OverrideHelper';
 
 const styles = {
   root: {
@@ -45,7 +44,7 @@ const styles = {
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)',
   },
   outlined: {
-    border: `1px solid ${colors.primary.main}`, // use colors from color-palette.js like so
+    border: `1px solid ${colors.primary.main}`, // use colors from palette.js like so
   }
 };
 
