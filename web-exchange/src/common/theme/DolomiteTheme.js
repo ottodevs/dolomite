@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-import Override, { generateOverrides, generateProps } from './core/Override';
+import { generateOverrides, generateProps } from './core/Override';
 import themeColors from './core/ThemeColors';
 
 import palette from './palette';

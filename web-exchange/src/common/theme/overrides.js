@@ -1,8 +1,7 @@
 /*
  * overrides.js
  *
- * Import your override objects/files and then add them to the Override singleton
- * NOTE: all overrides must be added in this file and only this file
+ * Import your override objects/files and then add them to the exported array
  *
  * Material-UI API reference: https://material-ui.com/customization/themes/
  */
