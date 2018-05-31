@@ -4,21 +4,22 @@ Dolomite relies on [Material-UI](https://github.com/mui-org/material-ui) for the
 
 ## Create a Color Palette
 
-In the `palette.js` file, create and export a palette hash. More information can be found in the [material-ui documentation](https://material-ui.com/customization/themes/#palette)
+In the `color-palette.js` file, create and export a palette hash. More information can be found in the [material-ui documentation](https://material-ui.com/customization/themes/#palette)
 
 ```javascript
-const palette = {
+const COLOR_PALETTE = {
   primary: {
-    // light: will be calculated from palette.primary.main,
+    // light: will be calculated from COLOR_PALETTE.primary.main,
     main: '#3170A3',
-    // dark: will be calculated from palette.primary.main,
+    // dark: will be calculated from COLOR_PALETTE.primary.main,
   },
   secondary: {
-    main: '#909'
+    main: '#ddd'
   },
 };
 
-export default palette;
+export default COLOR_PALETTE;
+
 ```
 
 ## Create an Override
@@ -44,7 +45,7 @@ const styles = {
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)',
   },
   outlined: {
-    border: `1px solid ${colors.primary.main}`, // use colors from palette.js like so
+    border: `1px solid ${colors.primary.main}`, // use colors from color-palette.js like so
   }
 };
 
@@ -63,7 +64,7 @@ In the example, `MuiButton` is the name of the Material-UI component. These name
 
 ## Register the Override
 
-In the `overrides.js` file...
+In the `component-overrides.js` file...
 
 ```javascript
 // (1) Import overridden components
@@ -71,12 +72,12 @@ import Button from './components/Buttons/Button';
 import Input from './components/Inputs/Input';
 
 // (2) Register overridden components
-const overrides = [
+const COMPONENT_OVERRIDES = [
   Button,
   Input
 ];
 
-export default overrides;
+export default COMPONENT_OVERRIDES;
 ```
 
 #### That's it!

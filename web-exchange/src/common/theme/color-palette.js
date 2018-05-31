@@ -1,4 +1,3 @@
-
 /*
  * color-palette.js
  *
