@@ -126,7 +126,9 @@ What's the point in creating a custom theme if it isn't being used, am I right? 
 ```javascript
 import { DolomiteThemeProvider } from "./common/theme/DolomiteTheme";
 
-<DolomiteThemeProvider>// Rest of your application</DolomiteThemeProvider>;
+<DolomiteThemeProvider>
+  <Main />
+</DolomiteThemeProvider>;
 ```
 
 ## That's It!
