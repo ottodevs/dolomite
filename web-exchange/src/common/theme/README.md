@@ -9,7 +9,7 @@ In the `color-palette.scss` file, create and export a palette map
 ```scss
 @import 'core/palette-helper.scss';
 
-$COLOR_PALETTE: (
+$color-palette: (
   primary: (
     main: #3170A3,  // every color must have a `main` variant
     light: #5190C3  // colors can have other variants (*)
@@ -23,7 +23,7 @@ $COLOR_PALETTE: (
   )
 );
 
-@include export-color-palette($COLOR_PALETTE);
+@include export-color-palette($color-palette);
 ```
 
 **\*NOTE**: In order for color variants to be consumed by the material-ui custom theme they must follow the patterns described in the material-ui documentation: https://material-ui.com/style/color/
@@ -44,7 +44,7 @@ To use the colors defined in `color-palette.scss` in other scss files throughout
 
 ### Using Colors in `React`
 
-To use the custom colors you define in `color-palette.scss` throughout your react application, import `DolomiteColors` from `Dolomite.js`.
+To use the custom colors you define in `color-palette.scss` throughout your react application, import `DolomiteColors` from `DolomiteTheme.js`.
 
 ```javascript
 import { DolomiteColors as colors } from '../path/to/.../common/theme/DolomiteTheme';
