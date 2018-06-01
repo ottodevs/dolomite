@@ -1,6 +1,6 @@
 # Custom Material-UI Theme
 
-Dolomite relies on [Material-UI](https://github.com/mui-org/material-ui) for the majority of it's components. We use a Material-UI [custom theme](https://material-ui.com/customization/themes/) to add our own look to these components. We have provided helper classes/functions to make the customization of Material-UI components quick, intuitive and easy.
+Dolomite relies on [material-ui](https://github.com/mui-org/material-ui) for the majority of it's components. We use a material-ui [custom theme](https://material-ui.com/customization/themes/) to add our own look to these components. We have provided helper classes/functions to make the customization of material-ui components quick, intuitive and easy.
 
 ## Color Palette
 
@@ -11,9 +11,8 @@ In the `color-palette.scss` file, create and export a palette map
 
 $color-palette: (
   primary: (
-    main: #3170a3,
-    /* every color must have a `main` variant*/ light: #5190c3
-      /* colors can have other variants (*)*/
+    main: #3170a3, /* every color must have a `main` variant*/ 
+    light: #5190c3 /* colors can have other variants (*)*/
   ),
   secondary: (
     main: #dddddd,
@@ -57,7 +56,7 @@ colors.secondary.main => "#dddddd"
 
 **NOTE**: In this example we alias DolomiteColors to `colors` to make it easier to work with. We reccomend that you do the same.
 
-## Style Material UI Components
+## Style Material-UI Components
 
 The Dolomite Theme is much more than just a change of colors, we restyle many of the material-ui components to fit our styleguide.
 
@@ -68,10 +67,7 @@ You can do this by creating a new javascript file and exporting a new instance o
 **Example:**
 
 ```javascript
-import {
-  Override,
-  BaseColorProvider as colors
-} from "../../core/OverrideHelper";
+import { Override, BaseColorProvider as colors } from "../../core/OverrideHelper";
 
 const styles = {
   root: {
@@ -100,7 +96,7 @@ const props = {
 export default new Override("MuiButton", styles, props);
 ```
 
-In the example, `MuiButton` is the name of the Material-UI component. These names can be found in the Material-UI component API documentation.
+In the example, `MuiButton` is the name of the material-ui component. These names can be found in the material-ui component API documentation.
 
 **NOTE:** Overrides don't use `DolomiteColors` from `DolomiteTheme.js` as the `OverrideHelper` that provides the `Override` class also provides colors with `BaseColorProvider`, which should be aliased to `colors` for ease of use.
 
@@ -128,7 +124,7 @@ import { DolomiteThemeProvider } from "./common/theme/DolomiteTheme";
 
 <DolomiteThemeProvider>
   <Main />
-</DolomiteThemeProvider>;
+</DolomiteThemeProvider>
 ```
 
 ## That's It!
