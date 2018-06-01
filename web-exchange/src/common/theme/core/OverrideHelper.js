@@ -2,8 +2,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { COLOR_PALETTE } from './PaletteProvider';
 
 /*
- * When creating an override of a Mui component, use 
- *   `newOverride(<Mui component name>, <style hash>, <default props hash>);`
+ * When creating an override of a Mui component, use
+ *   `export default new Override(<Mui component name>, <style hash>, <default props hash>);`
  */
 export class Override {
   constructor(name, styles, props) {
@@ -48,30 +48,3 @@ export function generateProps(overrides) {
   }
   return props;
 }
-
-
-// /////////////////////
-// Override Usage
-
-/*
-import { Override, BaseColorProvider as colors } from '../../core/OverrideHelper';
-
-const styles = {
-  root: {
-    // styles that every component of this type will have
-  },
-  raised: {
-    // styles that only components with `variant="raised"` will have
-  },
-  outlined: {
-    border: `1px solid ${colors.primary.main}`, // use colors from palette.js like so
-  }
-};
-
-const props = {
-  // default props for all components of this type
-};
-
-// export the Override instance
-export default new Override('MuiButton', styles, props);
-*/
