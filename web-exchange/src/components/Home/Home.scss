@@ -1,7 +1,7 @@
 @import '../../global-styles';
 
 .home {
-  color: $primary-text-color;
+  color: color(textPrimary);
   font-family: $dolomite-main-font;
   text-align: center;
 }

@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import COLOR_PALETTE from '../color-palette';
+import { COLOR_PALETTE } from './PaletteProvider';
 
 /*
  * When creating an override of a Mui component, use 
