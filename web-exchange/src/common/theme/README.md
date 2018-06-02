@@ -64,7 +64,7 @@ The Dolomite Theme is much more than just a change of colors, we restyle many of
 
 You can do this by creating a new javascript file and exporting a new instance of an `Override`
 
-**Example:**
+**All files in the `common/theme/components` that are an instance of `Override` will automatically be registered**
 
 ```javascript
 import { Override, BaseColorProvider as colors } from "../../core/OverrideHelper";
@@ -99,21 +99,6 @@ export default new Override("MuiButton", styles, props);
 In the example, `MuiButton` is the name of the material-ui component. These names can be found in the material-ui component API documentation.
 
 **NOTE:** Overrides don't use `DolomiteColors` from `DolomiteTheme.js` as the `OverrideHelper` that provides the `Override` class also provides colors with `BaseColorProvider`, which should be aliased to `colors` for ease of use.
-
-### Register the Override
-
-In the `component-overrides.js` file...
-
-```javascript
-// (1) Import overridden components
-import Button from "./components/Buttons/Button";
-import Input from "./components/Inputs/Input";
-
-// (2) Register overridden components
-const COMPONENT_OVERRIDES = [Button, Input];
-
-export default COMPONENT_OVERRIDES;
-```
 
 ## Usage
 
