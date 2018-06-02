@@ -24,6 +24,6 @@ $dolomite-color-palette: (
 );
 
 /*
- * Export the color palette for use in javascript
+ * Export the color palette for use in javascript and `color()` function
  */
 @include export-color-palette($dolomite-color-palette);

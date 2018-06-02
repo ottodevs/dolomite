@@ -22,8 +22,8 @@ $application-color-palette: ();
   $result: null;
 
   @for $i from 1 through length($variants) {
-    $e: nth($variants, $i);
-    $result: if($i != length($variants), $result#{$e}#{'.'}, $result#{$e});
+    $variant: nth($variants, $i);
+    $result: if($i != length($variants), $result#{$variant}#{'.'}, $result#{$variant});
   }
 
   @return $result;
