@@ -1,10 +1,7 @@
 @import 'core/palette-helper';
 
 /*
- * color-palette.scss
- *
- * Create and export (through @include export-color-palette()) 
- * a scss mapping of colors and variants. Each color MUST have 
+ * Palette of colors and variants. Each color MUST have 
  * a `main` variant.
  *
  * These colors are accesible through the `color(<name>, <variant>)` 
@@ -26,4 +23,7 @@ $color-palette: (
   )
 );
 
+/*
+ * Export the color palette for use in javascript
+ */
 @include export-color-palette($color-palette);

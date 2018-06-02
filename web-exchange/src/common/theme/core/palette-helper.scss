@@ -2,11 +2,22 @@
 
 $application-color-palette: ();
 
+/*
+ * Export a color palette to the content of body::before.
+ */
 @mixin export-color-palette($palette) {
   $application-color-palette: $palette !global;
-  @include json-encode($palette, regular);
+  @include json-encode($palette, regular); // provided by sass-json-export module
 }
 
+/*
+ * Get a color from the application's color palette
+ *
+ * Usage:
+ *
+ * color(primary, light) // gets primary[light] in  ( primary: ( light: #ffffff ))
+ * color(secondary)      // gets secondary[main] in  ( secondary: ( main: #dddddd ))
+ */
 @function color($variants...) {
   $map: $application-color-palette;
   
@@ -26,6 +37,14 @@ $application-color-palette: ();
   @return $map;
 }
 
+// Used internally to call an scss error
+@function error($msg) { 
+  @error $msg; 
+  @return null;
+}
+
+// used internally to convert [colors, variants] into "color.variant"
+// in error messages
 @function normalize-color($variants) {
   $result: null;
 
@@ -35,9 +54,4 @@ $application-color-palette: ();
   }
 
   @return $result;
-}
-
-@function error($msg) { 
-  @error $msg; 
-  @return null;
 }
