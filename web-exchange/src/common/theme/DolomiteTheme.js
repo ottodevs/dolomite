@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Override,
-  createMuiTheme,
-  MuiThemeProvider
-} from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import {
   generateStyleOverrides,
