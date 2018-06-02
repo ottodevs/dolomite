@@ -10,36 +10,9 @@ $application-color-palette: ();
   @include json-encode($palette, regular); // provided by sass-json-export module
 }
 
-/*
- * Get a color from the application's color palette
- *
- * Usage:
- *
- * color(primary, light) // gets primary[light] in  ( primary: ( light: #ffffff ))
- * color(secondary)      // gets secondary[main] in  ( secondary: ( main: #dddddd ))
- */
-@function color($variants...) {
-  $map: $application-color-palette;
-  
-  @if length($variants) == 0 { @return error('No name passed to `color()`'); }
-  @if length($variants) == 1 { @return color(nth($variants, 1), main); }
-
-  @each $key in $variants {
-    @if map-has-key($map, $key) {
-      $map: map-get($map, $key);
-    } @else if $key == main {
-      @return error('Color `#{nth($variants, 1)}` must have a `main` variant');
-    } @else {
-      @return error('Unknown color variant `#{normalize-color($variants)}`');
-    }
-  }
-
-  @return $map;
-}
-
 // Used internally to call an scss error
-@function error($msg) { 
-  @error $msg; 
+@function error($msg) {
+  @error $msg;
   @return null;
 }
 
@@ -54,4 +27,31 @@ $application-color-palette: ();
   }
 
   @return $result;
+}
+
+/*
+ * Get a color from the application's color palette
+ *
+ * Usage:
+ *
+ * color(primary, light) // gets primary[light] in  ( primary: ( light: #ffffff ))
+ * color(secondary)      // gets secondary[main] in  ( secondary: ( main: #dddddd ))
+ */
+@function color($variants...) {
+  $map: $application-color-palette;
+
+  @if length($variants) == 0 { @return error('No name passed to `color()`'); }
+  @if length($variants) == 1 { @return color(nth($variants, 1), main); }
+
+  @each $key in $variants {
+    @if map-has-key($map, $key) {
+      $map: map-get($map, $key);
+    } @else if $key == main {
+      @return error('Color `#{nth($variants, 1)}` must have a `main` variant');
+    } @else {
+      @return error('Unknown color variant `#{normalize-color($variants)}`');
+    }
+  }
+
+  @return $map;
 }
