@@ -1,15 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  Override,
+  createMuiTheme,
+  MuiThemeProvider
+} from '@material-ui/core/styles';
 
-import { generateStyleOverrides, generateProps, BaseColorProvider } from './core/OverrideHelper';
+import {
+  generateStyleOverrides,
+  generateProps,
+  BaseColorProvider
+} from './core/OverrideHelper';
 import { COLOR_PALETTE } from './core/PaletteProvider';
-import COMPONENT_OVERRIDES from './component-overrides';
 
+/*
+ * Load all Override instances from the `./components` directory recursivley
+ */
+const COMPONENT_OVERRIDES = (() => {
+  try {
+    const context = require.context('./components', true, /\.js$/);
+    const components = context.keys().map(context);
+
+    return components
+      .filter((imported) => {
+        try {
+          return imported.default.constructor.name === 'Override';
+        } catch (e) {
+          return false;
+        }
+      })
+      .map(override => override.default);
+  } catch (e) {
+    return [];
+  }
+})();
+
+/*
+ * Constructed Material-UI Theme using color palette and component overrides
+ */
 const DOLOMITE_THEME = createMuiTheme({
   COLOR_PALETTE,
   overrides: generateStyleOverrides(COMPONENT_OVERRIDES),
-  props: generateProps(COMPONENT_OVERRIDES),
+  props: generateProps(COMPONENT_OVERRIDES)
 });
 
 /*
@@ -22,9 +54,7 @@ const DOLOMITE_THEME = createMuiTheme({
  * <DolomiteThemeProvider>  ... Rest of App ...  </DolomiteThemeProvider
  */
 export const DolomiteThemeProvider = props => (
-  <MuiThemeProvider theme={DOLOMITE_THEME}>
-    {props.children}
-  </MuiThemeProvider>
+  <MuiThemeProvider theme={DOLOMITE_THEME}>{props.children}</MuiThemeProvider>
 );
 
 DolomiteThemeProvider.propTypes = { children: PropTypes.element.isRequired };
