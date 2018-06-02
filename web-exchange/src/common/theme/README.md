@@ -4,7 +4,7 @@ Dolomite relies on [material-ui](https://github.com/mui-org/material-ui) for the
 
 ## Color Palette
 
-In the `color-palette.scss` file, create and export a palette map
+In the `dolomite-color-palette.scss` file, create and export a palette map
 
 ```scss
 @import "core/palette-helper.scss";
@@ -30,7 +30,7 @@ $color-palette: (
 
 ### Using Colors in `SCSS`
 
-To use the colors defined in `color-palette.scss` in other scss files throughout the project use the `color()` scss function
+To use the colors defined in `dolomite-color-palette.scss` in other scss files throughout the project use the `color()` scss function
 
 ```scss
 @import "../path/to/.../global-styles";
@@ -44,17 +44,29 @@ To use the colors defined in `color-palette.scss` in other scss files throughout
 
 ### Using Colors in `React`
 
-To use the custom colors you define in `color-palette.scss` throughout your react application, import `DolomiteColors` from `DolomiteTheme.js`.
+To use the custom colors you define in `dolomite-color-palette.scss` throughout your react application, import `DolomiteColors` from `DolomiteTheme.js`.
 
 ```javascript
 import { DolomiteColors as colors } from '../path/to/.../common/theme/DolomiteTheme';
+```
+Example usage:
 
-colors.primary.main => "#3170A3"
-colors.primary.light => "#3170A3"
-colors.secondary.main => "#dddddd"
+```javascript
+<div>
+        <div style={{ backgroundColor: colors.primary.light }} />
+        <div style={{ backgroundColor: colors.primary.main }} />
+        <div style={{ backgroundColor: colors.primary.dark }} />
+</div>
+<div>
+        <div style={{ backgroundColor: colors.secondary.light }} />
+        <div style={{ backgroundColor: colors.secondary.main }} />
+        <div style={{ backgroundColor: colors.secondary.dark }} />
+</div>
+
 ```
 
-**NOTE**: In this example we alias DolomiteColors to `colors` to make it easier to work with. We reccomend that you do the same.
+
+**NOTE**: In this example we alias DolomiteColors to `colors` to make it easier to work with. We recommend that you do the same.
 
 ## Style Material-UI Components
 
