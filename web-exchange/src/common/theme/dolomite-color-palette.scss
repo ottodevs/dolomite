@@ -1,0 +1,29 @@
+@import 'core/palette-helper';
+
+/*
+ * Palette of colors and variants. Each color MUST have
+ * a `main` variant.
+ *
+ * These colors are accessible through the `color(<name>, <variant>)`
+ * scss function and are also consumed by the React app and the
+ * Dolomite custom material-ui theme. Read the Theme ReadMe for
+ * more information.
+ *
+ * Material-UI Color Reference: https://material-ui.com/style/color/
+ */
+$dolomite-color-palette: (
+  primary: (
+    main: #3170a3
+  ),
+  secondary: (
+    main: #ddd
+  ),
+  textPrimary: (
+    main: #333
+  )
+);
+
+/*
+ * Export the color palette for use in javascript
+ */
+@include export-color-palette($dolomite-color-palette);
