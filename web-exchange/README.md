@@ -6,7 +6,7 @@ Repository for the dolomite web exchange. This project is built in React.js, if 
 
 ### Installation
 
-Clone the repository and navigate into the `web-exchange` directory
+Clone the repository and navigate into the `web-exchange` folder
 
 ```shell
 git clone https://github.com/dolomite-exchange/dolomite.git
