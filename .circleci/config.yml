@@ -27,11 +27,11 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "exchange-api/build.sbt" }}
+          - v1-dependencies-{{ checksum "${EXCHANGE_API_DIRECTORY}/build.sbt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cd exchange-api && sbt compile test:compile exit
+      - run: cd ${EXCHANGE_API_DIRECTORY} && sbt compile test:compile exit
 
       - save_cache:
           paths:
@@ -42,11 +42,11 @@ jobs:
             - project/target/streams
             - ~/.sbt
             - ~/.iv2/cache
-          key: v1-dependencies--{{ checksum "exchange-api/build.sbt" }}
+          key: v1-dependencies--{{ checksum "${EXCHANGE_API_DIRECTORY}/build.sbt" }}
         
       # run tests!
       - run: 
-          command: cd exchange-api && sbt test exit
+          command: cd ${EXCHANGE_API_DIRECTORY} && sbt test exit
 
       - store_test_results:
           path: target/test-reports
