@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand|Roboto|Material+Icons');
-@import 'common/theme/dolomite-color-palette';
+
+// Build Themes
+@import 'common/theme/core/theme-helper';
+@import 'common/theme/themes/*';
+@include build-themes();
 
 $dolomite-main-font: 'Quicksand';

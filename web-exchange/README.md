@@ -44,10 +44,12 @@ color(primary)
 color(secondary, light)
 ```
 
-Colors from the scss palette can also be used in javascript!
+Colors from the scss palette can also be used in javascript through the use of `withThemeColors`
 
 ```javascript
-import { DolomiteColors as colors } from '../path/to/.../common/theme/DolomiteTheme';
+import { withThemeColors } from '../path/to/.../common/theme/DolomiteTheme';
 
-(<div style={{color: colors.textColor.main, background: colors.secondary.light}}></div>)
+{ withThemeColors(colors => (
+    <div style={{ backgroundColor: colors.primary.light }} />
+))}
 ```
