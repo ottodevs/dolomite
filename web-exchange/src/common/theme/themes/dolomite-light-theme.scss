@@ -1,8 +1,7 @@
-@import 'core/palette-helper';
-
 /*
  * Palette of colors and variants. Each color MUST have
- * a `main` variant.
+ * a `main` variant. Other variants, such as `dark` and `light`
+ * will be auto generated.
  *
  * These colors are accessible through the `color(<name>, <variant>)`
  * scss function and are also consumed by the React app and the
@@ -11,19 +10,23 @@
  *
  * Material-UI Color Reference: https://material-ui.com/style/color/
  */
-$dolomite-color-palette: (
+$dolomite-light-theme: (
   primary: (
-    main: #3170a3
+    main: #3170a3,
+    light: #5190c3
   ),
   secondary: (
     main: #ddd
   ),
   textPrimary: (
     main: #333
+  ),
+  background: (
+    main: #fff
   )
 );
 
 /*
- * Export the color palette for use in javascript and `color()` function
+ * Export the theme for use in javascript and `color()` function
  */
-@include export-color-palette($dolomite-color-palette);
+@include export-theme('light', $dolomite-light-theme);

@@ -14,7 +14,6 @@ import * as userActionCreators from '../../redux-store/actions/action-creators/u
 
 const AboutPageLink = props => <Link to="/about" {...props} />;
 
-
 export class Home extends React.Component {
   onKeyPress = (ev) => {
     if (ev.key === 'Enter') {
@@ -25,7 +24,7 @@ export class Home extends React.Component {
 
   onClearName = () => {
     this.props.updateUserName('');
-  }
+  };
 
   render() {
     return (
@@ -37,18 +36,24 @@ export class Home extends React.Component {
 
         <h2>Here are the values of tokens in USD</h2>
         <TokenValues tokenToUsd={this.props.tokenToUsd} />
-        <TextField
-          label="Your Name"
-          onKeyPress={ev => this.onKeyPress(ev)}
-        />
+        <TextField label="Your Name" onKeyPress={ev => this.onKeyPress(ev)} />
 
-        { !!this.props.userName && (
-        <Button style={{ marginLeft: 10 }} variant="outlined" color="primary" onClick={this.onClearName}>Clear Name</Button>
+        {!!this.props.userName && (
+          <Button
+            style={{ marginLeft: 10 }}
+            variant="outlined"
+            color="primary"
+            onClick={this.onClearName}
+          >
+            Clear Name
+          </Button>
         )}
 
         <br />
         <br />
-        <Button variant="raised" color="primary" component={AboutPageLink}>About Page</Button>
+        <Button variant="raised" color="primary" component={AboutPageLink}>
+          About Page
+        </Button>
       </div>
     );
   }
@@ -59,7 +64,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUserName: userName => dispatch(userActionCreators.updateUserName(userName))
+  updateUserName: userName =>
+    dispatch(userActionCreators.updateUserName(userName))
 });
 
 Home.defaultProps = {
@@ -75,6 +81,9 @@ Home.propTypes = {
 };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withTokenInfo
 )(Home);
