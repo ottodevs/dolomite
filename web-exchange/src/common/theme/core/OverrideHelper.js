@@ -27,10 +27,11 @@ function generateFullColorPalette(theme) {
 }
 
 /*
- * Generate the `forTheme(<options>)` helper provided by the Override helper
+ * Generate the `forTheme(<variants>)` helper provided by the Override helper
  */
 function generateForThemeHelper(themeName) {
-  return options => options[themeName];
+  return (variants, fallback = null) =>
+    (variants[themeName] == null ? fallback : variants[themeName]);
 }
 
 /*

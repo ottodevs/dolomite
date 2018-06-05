@@ -1,14 +1,15 @@
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import React from 'react';
-import Home from '../Home/Home';
-import About from '../About/About';
+import Exchange from '../Exchange/Exchange';
+import Wallet from '../Wallet/Wallet';
+
+import styles from './Main.scss';
+import * as routes from './Routes.js';
 
 const Main = () => (
-  <main>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about" component={About} />
-    </Switch>
+  <main className={styles.main}>
+    <Route exact path={routes.EXCHANGE} component={Exchange} />
+    <Route exact path={routes.WALLET} component={Wallet} />
   </main>
 );
 

@@ -13,16 +13,21 @@
 $dolomite-light-theme: (
   primary: (
     main: #3170a3,
-    light: #5190c3
   ),
   secondary: (
     main: #ddd
   ),
-  textPrimary: (
-    main: #333
+  text: (
+    main: #333,
+    primary: #333,
+    secondary: #aaa,
   ),
   background: (
-    main: #fff
+    main: #fff,
+    navigation: #fdfdfd
+  ),
+  divider: (
+    main: #ddd
   )
 );
 

@@ -1,10 +1,69 @@
+@import '../../global-styles';
 
-.title {
-  display: inline-block;
+nav {
+  align-items: center;
+  background: color(background, navigation);
+  border-bottom: 0.5px solid color(divider);
+  display: flex;
+  height: 60px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-.changetheme {
-  display: inline-block;
-  float: right;
-  top: 10px;
+.logo {
+  display: inline;
+  height: 46px;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+.title {
+  display: inline;
+  font-family: font(secondary);
+  font-size: 30px;
+  font-weight: bolder;
+  height: 100%;
+  line-height: 100%;
+  margin-left: 5px;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.leftnav {
+  width: 230px;
+}
+
+.centernavspaceleft {
+  flex-grow: 1;
+}
+
+.centernav {
+  margin-top: 5px;
+}
+
+.centernavspaceright {
+  flex-grow: 1;
+}
+
+.rightnav {
+  width: 230px;
+}
+
+// tablet size
+@media screen and (min-width: 550px) and (max-width: 959px) {
+  .rightnav {
+    width: 60px;
+  }
+
+  .tabflex {
+    justify-content: flex-end !important;
+    padding-right: 15px;
+  }
+
+  .centernavspaceright {
+    flex-grow: 0;
+    width: 0;
+  }
 }
