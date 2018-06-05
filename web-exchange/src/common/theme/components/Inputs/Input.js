@@ -1,13 +1,16 @@
 import { Override } from '../../core/OverrideHelper';
 
-const styles = (themeName, colors) => ({
+const styles = (forTheme, colors) => ({
   root: {
     fontWeight: '600',
-    color: themeName === 'dark' ? 'white' : colors.primary.dark
+    color: forTheme({
+      dark: 'white',
+      light: colors.primary.dark
+    })
   }
 });
 
-const props = themeName => ({});
+const props = forTheme => ({});
 
 /*
  * Dolomite Style for Input

@@ -27,6 +27,13 @@ function generateFullColorPalette(theme) {
 }
 
 /*
+ * Generate the `forTheme(<options>)` helper provided by the Override helper
+ */
+function generateForThemeHelper(themeName) {
+  return options => options[themeName];
+}
+
+/*
  * Generate MuiTheme `override` hash from array of Override instances
  */
 export function generateStyleOverrides(themeName, palette, overrides) {
@@ -35,7 +42,10 @@ export function generateStyleOverrides(themeName, palette, overrides) {
 
   for (let i = 0; i < overrides.length; i += 1) {
     const override = overrides[i];
-    styles[override.name] = override.styles(themeName, colors);
+    styles[override.name] = override.styles(
+      generateForThemeHelper(themeName),
+      colors
+    );
   }
   return styles;
 }
@@ -47,7 +57,7 @@ export function generateProps(themeName, overrides) {
   const props = {};
   for (let i = 0; i < overrides.length; i += 1) {
     const override = overrides[i];
-    props[override.name] = override.props(themeName);
+    props[override.name] = override.props(generateForThemeHelper(themeName));
   }
   return props;
 }

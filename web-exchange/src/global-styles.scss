@@ -2,7 +2,9 @@
 
 // Build Themes
 @import 'common/theme/core/theme-helper';
-@import 'common/theme/themes/*';
+/* stylelint-disable */
+@import 'common/theme/themes/*.scss';
+/* stylelint-enable */
 @include build-themes();
 
 $dolomite-main-font: 'Quicksand';

@@ -79,7 +79,7 @@ You can do this by creating a new javascript file and exporting a new instance o
 ```javascript
 import { Override } from '../../core/OverrideHelper';
 
-const styles = (themeName, colors) => ({
+const styles = (forTheme, colors) => ({
   root: {
     // styles that every component of this type will have
     borderRadius: 3
@@ -88,7 +88,11 @@ const styles = (themeName, colors) => ({
     // styles that only components with `variant="raised"` will have
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
-    color: themeName == 'dark' ? 'white' : 'black',
+    // different values for different themes
+    color: forTheme({
+      dark: 'white',
+      light: 'black'
+    }),
     height: 48,
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .30)"
@@ -98,7 +102,7 @@ const styles = (themeName, colors) => ({
   }
 });
 
-const props = themeName => ({
+const props = forTheme => ({
   // default props for all components of this type
   disabled: false
 });
@@ -106,7 +110,7 @@ const props = themeName => ({
 export default new Override("MuiButton", styles, props);
 ```
 
-In the example, `MuiButton` is the name of the material-ui component. These names can be found in the material-ui component API documentation.
+In the example, `MuiButton` is the name of the material-ui component. These names can be found in the material-ui component API documentation. Notice how `styles` and `props` are both functions. `forTheme(<options>)` is a helper function intended to make further customization even easier. `colors` is the color palette for the theme being generated.
 
 All scss files in `common/theme/components` that are an instance of `Override` will automatically be registered
 

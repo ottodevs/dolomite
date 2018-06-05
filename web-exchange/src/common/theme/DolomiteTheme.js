@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import cookies from 'react-cookies';
 
 import store from '../../redux-store/store';
 import * as themeActionCreators from '../../redux-store/actions/action-creators/theme-action-creators';
@@ -141,12 +142,19 @@ export const withTheme = callback => (
  * NOTE: If there are only 2 themes, sending null as `themeName` will swap the themes
  */
 export const dolomiteThemeDispatcher = callback =>
-  callback((themeName) => {
+  callback((name) => {
     /*eslint-disable */
-    if (themeName == null && Object.keys(SCSS_THEMES).length == 2) {
-      const themes = Object.keys(SCSS_THEMES);
-      themeName = currentTheme().name == themes[0] ? themes[1] : themes[0];
+    var themeName = name;
+    if (name == null) {
+      const themeNames = Object.keys(SCSS_THEMES);
+      const themeIndex = themeNames.indexOf(currentTheme().name);
+      themeName =
+        themeIndex >= themeNames.length - 1
+          ? themeNames[0]
+          : themeNames[themeIndex + 1];
     }
+
+    cookies.save("selectedTheme", themeName, { path: "/" });
     store.dispatch(themeActionCreators.changeTheme(themeName));
     setCssColors(DolomiteThemes[themeName].palette);
     /* eslint-enable */
