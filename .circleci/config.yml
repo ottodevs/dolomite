@@ -31,12 +31,22 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cat /dev/null | sbt test:compile
+      - run: sbt compile test:compile exit
 
       - save_cache:
           paths:
             - ~/.m2
+            - target/resolution-cache
+            - target/streams
+            - project/target/resolution-cache
+            - project/target/streams
+            - ~/.sbt
+            - ~/.iv2/cache
           key: v1-dependencies--{{ checksum "build.sbt" }}
         
       # run tests!
-      - run: cat /dev/null | sbt test:test
+      - run: 
+          command: sbt test exit
+
+      - store_test_results:
+          path: target/test-reports
