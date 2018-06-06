@@ -3,24 +3,27 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import cookies from 'react-cookies';
+import * as r from 'ramda';
 
 import store from '../../redux-store/store';
 import * as themeActionCreators from '../../redux-store/actions/action-creators/theme-action-creators';
 import { generateStyleOverrides, generateProps } from './core/OverrideHelper';
 import { SCSS_THEMES, setCssColors } from './core/StyleSheetThemeProvider';
 
+/*eslint-disable */
+
 /*
  * Load all Override instances from the `./components` directory recursivley
  */
 const COMPONENT_OVERRIDES = (() => {
   try {
-    const context = require.context('./components', true, /\.js$/);
+    const context = require.context("./components", true, /\.js$/);
     const components = context.keys().map(context);
 
     return components
-      .filter((imported) => {
+      .filter(imported => {
         try {
-          return imported.default.constructor.name === 'Override';
+          return imported.default.constructor.name === "Override";
         } catch (e) {
           return false;
         }
@@ -34,28 +37,16 @@ const COMPONENT_OVERRIDES = (() => {
 /*
  * Constructed Material-UI Themes using color palettes and component overrides
  */
-export const DolomiteThemes = (() => {
-  const keys = Object.keys(SCSS_THEMES);
-  const themes = {};
-
-  for (let i = 0; i < keys.length; i += 1) {
-    const name = keys[i];
-
-    const theme = createMuiTheme({
-      palette: SCSS_THEMES[name],
-      overrides: generateStyleOverrides(
-        name,
-        SCSS_THEMES[name],
-        COMPONENT_OVERRIDES
-      ),
+export const DolomiteThemes = r.mapObjIndexed(
+  (palette, name) =>
+    createMuiTheme({
+      name,
+      palette,
+      overrides: generateStyleOverrides(name, palette, COMPONENT_OVERRIDES),
       props: generateProps(name, COMPONENT_OVERRIDES)
-    });
-    theme.name = name;
-    themes[name] = theme;
-  }
-
-  return themes;
-})();
+    }),
+  SCSS_THEMES
+);
 
 /*
  * React Context used in conjuction with redux to make the theme part of application state
@@ -82,12 +73,10 @@ const providerComponent = props => (
   </ThemeContext.Provider>
 );
 
-/*eslint-disable */
 providerComponent.propTypes = {
   children: PropTypes.element.isRequired,
   theme: PropTypes.object.isRequired
 };
-/* eslint-enable */
 
 export const DolomiteThemeProvider = connect(state => ({
   theme: state.theme.theme
@@ -103,59 +92,92 @@ export const currentTheme = () => DolomiteThemes[store.getState().theme.theme];
 if (currentTheme()) setCssColors(currentTheme().palette); // setup initial css colors
 
 /*
+ * Set the current theme by it's name. If name is null, it will select the next theme
+ */
+function changeCurrentTheme(name) {
+  let themeName = name;
+  if (themeName == null) {
+    const themeNames = Object.keys(SCSS_THEMES);
+    const themeIndex = themeNames.indexOf(currentTheme().name);
+    themeName =
+      themeIndex >= themeNames.length - 1
+        ? themeNames[0]
+        : themeNames[themeIndex + 1];
+  }
+
+  cookies.save("selectedTheme", themeName, { path: "/" });
+  store.dispatch(themeActionCreators.changeTheme(themeName));
+  setCssColors(DolomiteThemes[themeName].palette);
+}
+
+/*
  * Provides wrapped components with an instance of the current color palette
  *
  * Usage: 
  *
- * withThemeColors((colors) => (
- *  <div style={{ color: colors.textPrimary.light }}></div>
- * ));
+ * export default withThemeColors(MyComponent);
+ *  
+ * // In render
+ * <div style={{ color: props.colors.primary.light }}></div>
  */
-export const withThemeColors = callback => (
-  <ThemeContext.Consumer>
-    {theme => callback(theme.palette)}
-  </ThemeContext.Consumer>
-);
+export const withThemeColors = WrappedComponent =>
+  class extends React.Component {
+    render() {
+      return (
+        <WrappedComponent
+          {...this.props}
+          colors={currentTheme().palette || {}}
+        />
+      );
+    }
+  };
 
 /*
  * Provides wrapped components with an instance of the current theme
  *
  * Usage: 
  *
- * withTheme((theme) => (
- *  <div style={{ color: theme == 'light' ? '#000' : '#fff' }}></div>
- * ));
+ * export default withTheme(MyComponent);
+ *
+ * <div style={{ color: props.theme == 'light' ? '#000' : '#fff' }}></div>
  */
-export const withTheme = callback => (
-  <ThemeContext.Consumer>{theme => callback(theme)}</ThemeContext.Consumer>
-);
+export const withTheme = WrappedComponent =>
+  class extends React.Component {
+    render() {
+      return (
+        <ThemeContext.Consumer>
+          {theme => <WrappedComponent {...this.props} theme={theme} />}
+        </ThemeContext.Consumer>
+      );
+    }
+  };
 
 /*
  * Provides a component with a function that will change the site's theme
  *
  * Usage: 
  *
- * dolomiteThemeDispatcher((changeTheme) => (
- *  <Button onClick={() => changeTheme('dark')}>Use Dark Theme</Button>
- * ));
+ * export default withTheme(MyComponent);
  *
- * NOTE: If there are only 2 themes, sending null as `themeName` will swap the themes
+ * <Button onClick={() => props.requestThemeChange()}>Swap Theme</Button>
+ *
+ * NOTE: If the name given to requestThemeChange is null the next available theme will be chosen
  */
-export const dolomiteThemeDispatcher = callback =>
-  callback((name) => {
-    /*eslint-disable */
-    var themeName = name;
-    if (name == null) {
-      const themeNames = Object.keys(SCSS_THEMES);
-      const themeIndex = themeNames.indexOf(currentTheme().name);
-      themeName =
-        themeIndex >= themeNames.length - 1
-          ? themeNames[0]
-          : themeNames[themeIndex + 1];
+export const withThemeChanger = WrappedComponent =>
+  class extends React.Component {
+    render() {
+      return (
+        <ThemeContext.Consumer>
+          {theme => (
+            <WrappedComponent
+              {...this.props}
+              theme={theme}
+              requestThemeChange={name => changeCurrentTheme(name)}
+            />
+          )}
+        </ThemeContext.Consumer>
+      );
     }
+  };
 
-    cookies.save("selectedTheme", themeName, { path: "/" });
-    store.dispatch(themeActionCreators.changeTheme(themeName));
-    setCssColors(DolomiteThemes[themeName].palette);
-    /* eslint-enable */
-  });
+/* eslint-enable */

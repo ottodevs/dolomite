@@ -36,20 +36,18 @@ const About = (props) => {
       <h3>Here is our color palette:</h3>
       <h5>Using JS</h5>
 
-      {withThemeColors(colors => (
-        <div>
-          <div className={styles['about-color-palette-row']}>
-            <div style={{ backgroundColor: colors.primary.light }} />
-            <div style={{ backgroundColor: colors.primary.main }} />
-            <div style={{ backgroundColor: colors.primary.dark }} />
-          </div>
-          <div className={styles['about-color-palette-row']}>
-            <div style={{ backgroundColor: colors.secondary.light }} />
-            <div style={{ backgroundColor: colors.secondary.main }} />
-            <div style={{ backgroundColor: colors.secondary.dark }} />
-          </div>
+      <div>
+        <div className={styles['about-color-palette-row']}>
+          <div style={{ backgroundColor: props.colors.primary.light }} />
+          <div style={{ backgroundColor: props.colors.primary.main }} />
+          <div style={{ backgroundColor: props.colors.primary.dark }} />
         </div>
-      ))}
+        <div className={styles['about-color-palette-row']}>
+          <div style={{ backgroundColor: props.colors.secondary.light }} />
+          <div style={{ backgroundColor: props.colors.secondary.main }} />
+          <div style={{ backgroundColor: props.colors.secondary.dark }} />
+        </div>
+      </div>
 
       <h5>Using SCSS</h5>
       <div className={styles['about-color-palette-row']}>
@@ -79,4 +77,4 @@ About.propTypes = {
   shouldLinkHome: PropTypes.bool
 };
 
-export default About;
+export default withThemeColors(About);
