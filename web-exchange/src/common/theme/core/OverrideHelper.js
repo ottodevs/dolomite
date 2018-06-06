@@ -30,10 +30,10 @@ function generateFullColorPalette(theme) {
 /*
  * Generate the `forTheme(<variants>)` helper provided by the Override helper
  */
-function generateForThemeHelper(themeName) {
+const generateForThemeHelper = themeName => {
   return (variants, fallback = null) =>
-    (variants[themeName] == null ? fallback : variants[themeName]);
-}
+    variants[themeName] == null ? fallback : variants[themeName];
+};
 
 /*
  * Generate MuiTheme `override` hash from array of Override instances

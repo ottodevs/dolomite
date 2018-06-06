@@ -6,7 +6,7 @@ import styles from './Exchange.scss';
 
 const Exchange = props => (
   <div>
-    <p className={styles.bigtext}>Exchange</p>
+    <p className={styles.bigText}>Exchange</p>
   </div>
 );
 

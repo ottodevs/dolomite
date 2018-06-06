@@ -11,7 +11,7 @@ import logo from '../../assets/DolomiteLogoCircle.png';
 import ChangeTheme from './Settings/ChangeTheme';
 import * as routes from '../Main/Routes.js';
 
-const OPTIONS = {
+const MENU_OPTIONS = {
   Exchange: routes.EXCHANGE,
   Wallet: routes.WALLET
 };
@@ -26,7 +26,7 @@ export class Navbar extends React.Component {
   }
 
   componentWillMount() {
-    this.unlisten = this.props.history.listen((location) => {
+    this.unlisten = this.props.history.listen(location => {
       this.setState({ location });
     });
   }
@@ -36,33 +36,37 @@ export class Navbar extends React.Component {
   }
 
   render() {
+    const selectedTab = Object.values(MENU_OPTIONS).indexOf(
+      this.state.location.pathname
+    );
+
     return (
       <nav>
-        <div className={styles.leftnav}>
+        <div className={styles.leftNav}>
           <img src={logo} className={styles.logo} alt="" />
           <h1 className={styles.title}>Dolomite</h1>
         </div>
 
-        <div className={styles.centernavspaceleft} />
+        <div className={styles.centerNavSpaceLeft} />
 
-        <div className={styles.centernav}>
+        <div className={styles.centerNav}>
           <Tabs
             action={actions => setTimeout(actions.updateIndicator(actions), 0)}
-            value={Object.values(OPTIONS).indexOf(this.state.location.pathname)}
-            classes={{ flexContainer: styles.tabflex }}
+            value={selectedTab}
+            classes={{ flexContainer: styles.tabFlex }}
             indicatorColor="primary"
             textColor="primary"
             centered
           >
-            {Object.keys(OPTIONS).map(label => (
-              <Tab label={label} component={Link} to={OPTIONS[label]} />
+            {Object.keys(MENU_OPTIONS).map(label => (
+              <Tab label={label} component={Link} to={MENU_OPTIONS[label]} />
             ))}
           </Tabs>
         </div>
 
-        <div className={styles.centernavspaceright} />
+        <div className={styles.centerNavSpaceRight} />
 
-        <div className={styles.rightnav}>
+        <div className={styles.rightNav}>
           <ChangeTheme />
         </div>
       </nav>

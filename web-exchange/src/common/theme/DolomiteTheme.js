@@ -1,27 +1,27 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import cookies from "react-cookies";
-import * as r from "ramda";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import * as r from 'ramda';
 
-import store from "../../redux-store/store";
-import * as themeActionCreators from "../../redux-store/actions/action-creators/theme-action-creators";
-import { generateStyleOverrides, generateProps } from "./core/OverrideHelper";
-import { SCSS_THEMES, setCssColors } from "./core/StyleSheetThemeProvider";
+import store from '../../redux-store/store';
+import * as themes from './themes';
+import * as themeActionCreators from '../../redux-store/actions/action-creators/theme-action-creators';
+import { generateStyleOverrides, generateProps } from './core/OverrideHelper';
+import { SCSS_THEMES, setCssColors } from './core/StyleSheetThemeProvider';
 
 /*
  * Load all Override instances from the `./components` directory recursivley
  */
 const COMPONENT_OVERRIDES = (() => {
   try {
-    const context = require.context("./components", true, /\.js$/);
+    const context = require.context('./components', true, /\.js$/);
     const components = context.keys().map(context);
 
     return components
       .filter(imported => {
         try {
-          return imported.default.constructor.name === "Override";
+          return imported.default.constructor.name === 'Override';
         } catch (e) {
           return false;
         }
@@ -101,7 +101,6 @@ function changeCurrentTheme(name) {
     themeName = themeIsLast ? themeNames[0] : themeNames[themeIndex + 1];
   }
 
-  cookies.save("selectedTheme", themeName, { path: "/" });
   store.dispatch(themeActionCreators.changeTheme(themeName));
   setCssColors(DolomiteThemes[themeName].palette);
 }

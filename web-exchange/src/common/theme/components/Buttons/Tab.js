@@ -8,12 +8,13 @@ const styles = (forTheme, colors) => ({
     fontWeight: 'lighter'
   },
   selected: {
-    color: `${forTheme(
-      {
-        light: colors.primary.dark
-      },
-      colors.text.primary
-    )}!important`
+    color:
+      forTheme(
+        {
+          light: colors.primary.dark
+        },
+        colors.text.primary
+      ) + '!important'
   },
   label: {
     fontSize: '20px !important',

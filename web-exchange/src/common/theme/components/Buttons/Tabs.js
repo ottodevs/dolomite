@@ -5,12 +5,13 @@ const styles = (forTheme, colors) => ({
   indicator: {
     bottom: 3,
     transform: 'scale(0.5, 1)',
-    background: `${forTheme(
-      {
-        light: colors.primary.dark
-      },
-      colors.text.primary
-    )}!important`
+    background:
+      forTheme(
+        {
+          light: colors.primary.dark
+        },
+        colors.text.primary
+      ) + '!important'
   }
 });
 

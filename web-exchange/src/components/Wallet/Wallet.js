@@ -6,7 +6,7 @@ import styles from './Wallet.scss';
 
 const Wallet = props => (
   <div>
-    <p className={styles.bigtext}>Wallet</p>
+    <p className={styles.bigText}>Wallet</p>
   </div>
 );
 
