@@ -41,7 +41,6 @@ function encodeToCssVariables(colors) {
       }
     }
   }
-
   return variables;
 }
 

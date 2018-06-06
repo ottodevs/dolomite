@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import * as r from 'ramda';
 
 /*
  * When creating an override of a Mui component, use
@@ -37,28 +38,30 @@ function generateForThemeHelper(themeName) {
 /*
  * Generate MuiTheme `override` hash from array of Override instances
  */
-export function generateStyleOverrides(themeName, palette, overrides) {
-  const styles = {};
+export const generateStyleOverrides = (themeName, palette, overrides) => {
   const colors = generateFullColorPalette(palette);
-
-  for (let i = 0; i < overrides.length; i += 1) {
-    const override = overrides[i];
-    styles[override.name] = override.styles(
-      generateForThemeHelper(themeName),
-      colors
-    );
-  }
-  return styles;
-}
+  return r.mergeAll(
+    r.map(
+      override => ({
+        [override.name]: override.styles(
+          generateForThemeHelper(themeName),
+          colors
+        )
+      }),
+      overrides
+    )
+  );
+};
 
 /*
  * Generate MuiTheme `props` hash from array of Override instances
  */
-export function generateProps(themeName, overrides) {
-  const props = {};
-  for (let i = 0; i < overrides.length; i += 1) {
-    const override = overrides[i];
-    props[override.name] = override.props(generateForThemeHelper(themeName));
-  }
-  return props;
-}
+export const generateProps = (themeName, overrides) =>
+  r.mergeAll(
+    r.map(
+      override => ({
+        [override.name]: override.props(generateForThemeHelper(themeName))
+      }),
+      overrides
+    )
+  );
