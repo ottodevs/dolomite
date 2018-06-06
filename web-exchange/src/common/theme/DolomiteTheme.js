@@ -1,16 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import cookies from 'react-cookies';
-import * as r from 'ramda';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import cookies from "react-cookies";
+import * as r from "ramda";
 
-import store from '../../redux-store/store';
-import * as themeActionCreators from '../../redux-store/actions/action-creators/theme-action-creators';
-import { generateStyleOverrides, generateProps } from './core/OverrideHelper';
-import { SCSS_THEMES, setCssColors } from './core/StyleSheetThemeProvider';
-
-/*eslint-disable */
+import store from "../../redux-store/store";
+import * as themeActionCreators from "../../redux-store/actions/action-creators/theme-action-creators";
+import { generateStyleOverrides, generateProps } from "./core/OverrideHelper";
+import { SCSS_THEMES, setCssColors } from "./core/StyleSheetThemeProvider";
 
 /*
  * Load all Override instances from the `./components` directory recursivley
@@ -99,10 +97,8 @@ function changeCurrentTheme(name) {
   if (themeName == null) {
     const themeNames = Object.keys(SCSS_THEMES);
     const themeIndex = themeNames.indexOf(currentTheme().name);
-    themeName =
-      themeIndex >= themeNames.length - 1
-        ? themeNames[0]
-        : themeNames[themeIndex + 1];
+    const themeIsLast = themeIndex >= themeNames.length - 1;
+    themeName = themeIsLast ? themeNames[0] : themeNames[themeIndex + 1];
   }
 
   cookies.save("selectedTheme", themeName, { path: "/" });
@@ -179,5 +175,3 @@ export const withThemeChanger = WrappedComponent =>
       );
     }
   };
-
-/* eslint-enable */
