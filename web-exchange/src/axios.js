@@ -14,13 +14,16 @@ const exchangeApiRequester = axios.create({
 // TODO: change to actual auth token if needed
 exchangeApiRequester.defaults.headers.common.Authorization = 'AUTH TOKEN';
 
-const responseInterceptor = exchangeApiRequester.interceptors.response.use((response) => {
-  console.log(response);
-  return response;
-}, (error) => {
-  console.log(error); // TODO: Here's where we'd send the log to the server
-  return Promise.reject(error);
-});
+const responseInterceptor = exchangeApiRequester.interceptors.response.use(
+  response => {
+    console.log(response);
+    return response;
+  },
+  error => {
+    console.log(error); // TODO: Here's where we'd send the log to the server
+    return Promise.reject(error);
+  }
+);
 console.log(responseInterceptor);
 
 export default exchangeApiRequester;

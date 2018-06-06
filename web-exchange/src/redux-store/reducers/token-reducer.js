@@ -9,7 +9,7 @@ const tokenReducer = (state = INITIAL_STATE, action) => {
     case tokenActionTypes.UPDATE_TOKEN_VALUES:
       return {
         ...state,
-        tokenToUsd: action.tokenValues,
+        tokenToUsd: action.tokenValues
       };
     default:
       return state;

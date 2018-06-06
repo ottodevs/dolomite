@@ -5,7 +5,7 @@ import React from 'react';
 This HOC allows you to wrap a component and automatically get
 the tokenToUsd props from the redux store passed into props
  */
-const withTokenInfo = (WrappedComponent) => {
+const withTokenInfo = WrappedComponent => {
   const WithTokenInfo = class extends React.Component {
     componentDidMount() {
       // fetch data and stuff
@@ -24,7 +24,10 @@ const withTokenInfo = (WrappedComponent) => {
     // your shared action call
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithTokenInfo);
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(WithTokenInfo);
 };
 
 export default withTokenInfo;

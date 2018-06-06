@@ -13,11 +13,11 @@ import * as actionCreators from './redux-store/actions/action-creators/token-act
 // This applies globally to all axios instances.
 // See axios.js file in src/ folder to see how to apply to specific instances only.
 const requestInterceptor = axios.interceptors.request.use(
-  (request) => {
+  request => {
     console.log(request);
     return request;
   },
-  (error) => {
+  error => {
     // since this is a request interceptor, this one will catch things like not
     // having an internet connection
     console.log(error);
@@ -28,16 +28,16 @@ const requestInterceptor = axios.interceptors.request.use(
 console.log(requestInterceptor);
 // axios.interceptors.request.eject(myInterceptor); TO REMOVE INTERCEPTOR
 
-const dispatchUpdateTokenValues = (tokenValues) => {
+const dispatchUpdateTokenValues = tokenValues => {
   store.dispatch(actionCreators.updateTokenValues(tokenValues));
 };
 
-getCryptocurrencyPrices().then((res) => {
+getCryptocurrencyPrices().then(res => {
   dispatchUpdateTokenValues(res.data);
 });
 
 setInterval(() => {
-  getCryptocurrencyPrices().then((res) => {
+  getCryptocurrencyPrices().then(res => {
     dispatchUpdateTokenValues(res.data);
   });
 }, 10000);

@@ -15,7 +15,10 @@ describe('reducer', () => {
       BTC: 5000
     };
     expect(
-      tokenReducer(INITIAL_STATE, tokenActionCreators.updateTokenValues(tokenToUsd))
+      tokenReducer(
+        INITIAL_STATE,
+        tokenActionCreators.updateTokenValues(tokenToUsd)
+      )
     ).toEqual({
       ...INITIAL_STATE,
       tokenToUsd

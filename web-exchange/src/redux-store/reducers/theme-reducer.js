@@ -1,5 +1,3 @@
-import cookies from 'react-cookies';
-
 import * as themeActionTypes from '../actions/action-types/theme-action-types';
 import * as themes from '../../common/theme/themes';
 

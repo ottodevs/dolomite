@@ -12,7 +12,10 @@ describe('reducer', () => {
   it('should update the token values', () => {
     const updatedUserName = 'Jordan Cutler';
     expect(
-      userReducer(INITIAL_STATE, userActionCreators.updateUserName(updatedUserName))
+      userReducer(
+        INITIAL_STATE,
+        userActionCreators.updateUserName(updatedUserName)
+      )
     ).toEqual({
       ...INITIAL_STATE,
       userName: updatedUserName

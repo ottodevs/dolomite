@@ -5,9 +5,8 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import * as r from 'ramda';
 
 import store from '../../redux-store/store';
-import * as themes from './themes';
 import * as themeActionCreators from '../../redux-store/actions/action-creators/theme-action-creators';
-import { generateStyleOverrides, generateProps } from './core/OverrideHelper';
+import { generateProps, generateStyleOverrides } from './core/OverrideHelper';
 import { SCSS_THEMES, setCssColors } from './core/StyleSheetThemeProvider';
 
 /*
@@ -108,10 +107,10 @@ function changeCurrentTheme(name) {
 /*
  * Provides wrapped components with an instance of the current color palette
  *
- * Usage: 
+ * Usage:
  *
  * export default withThemeColors(MyComponent);
- *  
+ *
  * // In render
  * <div style={{ color: props.colors.primary.light }}></div>
  */
@@ -130,7 +129,7 @@ export const withThemeColors = WrappedComponent =>
 /*
  * Provides wrapped components with an instance of the current theme
  *
- * Usage: 
+ * Usage:
  *
  * export default withTheme(MyComponent);
  *
@@ -150,7 +149,7 @@ export const withTheme = WrappedComponent =>
 /*
  * Provides a component with a function that will change the site's theme
  *
- * Usage: 
+ * Usage:
  *
  * export default withTheme(MyComponent);
  *

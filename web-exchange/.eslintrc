@@ -5,24 +5,11 @@
     "jest": true
   },
   "parser": "babel-eslint",
+  "plugins": [
+    "prettier"
+  ],
   "extends": "prettier",
   "rules": {
-    "linebreak-style": 0,
-    "strict" : 0,
-    "func-names": ["error", "never"],
-    "comma-dangle": "off",
-    "react/jsx-filename-extension": "off",
-    "import/extensions": "off",
-    "import/no-unresolved": "off",
-    "import/no-extraneous-dependencies": "off",
-    "no-trailing-spaces": "off",
-    "function-paren-newline": "off",
-    "import/prefer-default-export": "off",
-    "import/no-named-as-default": "off",
-    "no-console": "off",
-    "no-debugger": "off",
-    "no-unused-vars": "warn",
-    "react/prop-types": 0,
-    "quotes": ["error", "single"]
+    "prettier/prettier": "error"
   }
 }
