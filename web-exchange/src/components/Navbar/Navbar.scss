@@ -1,10 +1,80 @@
+@import '../../global-styles';
 
-.title {
-  display: inline-block;
+nav {
+  align-items: center;
+  background: color(background, navigation);
+  border-bottom: 0.5px solid color(divider);
+  display: flex;
+  height: 60px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-.changetheme {
-  display: inline-block;
-  float: right;
-  top: 10px;
+.logo {
+  display: inline;
+  height: 46px;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+.title {
+  display: inline;
+  font-family: font(secondary);
+  font-size: 30px;
+  font-weight: bolder;
+  height: 100%;
+  line-height: 100%;
+  margin-left: 5px;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.leftNav {
+  width: 230px;
+}
+
+.centerNavSpaceLeft {
+  flex-grow: 1;
+}
+
+.centerNav {
+  margin-top: 5px;
+}
+
+.centerNavSpaceRight {
+  flex-grow: 1;
+}
+
+.rightNav {
+  width: 230px;
+}
+
+// tablet size
+@media screen and (min-width: $dolomite-width-mobile) and (max-width: $dolomite-width-tablet) {
+  .rightNav {
+    width: 60px;
+  }
+
+  .tabFlex {
+    justify-content: flex-end !important;
+    padding-right: 15px;
+  }
+
+  .centerNavSpaceRight {
+    flex-grow: 0;
+    width: 0;
+  }
+}
+
+@media screen and (max-width: $dolomite-width-mobile) {
+  .title {
+    display: none;
+  }
+
+  .logo {
+    height: 42px;
+    padding: 15px;
+  }
 }

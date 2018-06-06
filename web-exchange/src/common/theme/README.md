@@ -49,24 +49,17 @@ To use the colors of the selected theme throughout your react application, impor
 
 ```javascript
 import { withThemeColors } from '../path/to/.../common/theme/DolomiteTheme';
+
+class YourComponent extends React.Component {
+  render() {
+    // use props.colors to access the current theme's color palette
+    return (<div style={{ backgroundColor: props.colors.primary.light }} />);
+  }
+}
+
+// provides your component with the `colors` prop
+export default withThemeColors(YourComponent);
 ```
-
-Example usage:
-
-```javascript
-{ withThemeColors(colors => (
-  <div>
-    <div style={{ backgroundColor: colors.primary.light }} />
-    <div style={{ backgroundColor: colors.primary.main }} />
-    <div style={{ backgroundColor: colors.primary.dark }} />
-    
-    <div style={{ backgroundColor: colors.secondary.light }} />
-    <div style={{ backgroundColor: colors.secondary.main }} />
-    <div style={{ backgroundColor: colors.secondary.dark }} />
-  </div>
-))}
-```
-
 
 ## Style Material-UI Components
 
@@ -92,7 +85,7 @@ const styles = (forTheme, colors) => ({
     color: forTheme({
       dark: 'white',
       light: 'black'
-    }),
+    }, 'black'), // be sure to set a default
     height: 48,
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .30)"
@@ -128,19 +121,23 @@ import { DolomiteThemeProvider } from '../path/to/.../common/theme/DolomiteTheme
 
 ## Changing the Theme
 
-The theme is changed by the use of a function that provides a component with a function `changeTheme(<themeName>)`, done like so:
+The theme is changed by the use of a higher order component (HOC) that provides your component with a function `props.requestThemeChange(<themeName>)`
 
 ```javascript
-import { dolomiteThemeDispatcher } from '../path/to/.../common/theme/DolomiteTheme';
+import { withThemeChanger } from '../path/to/.../common/theme/DolomiteTheme';
+import * as themes from "../path/to/.../common/theme/themes";
 
-// Button that will swap the theme
-const SwapThemeButton = dolomiteThemeDispatcher(changeTheme => (
-  <Button className={styles.changeTheme} onClick={() => changeTheme()}>
-    Swap Theme
-  </Button>
-));
+class YourComponent extends React.Component {
+  render() {
+    // use props.requestChangeTheme() to change the application's current theme
+    return (<Button onClick={() => props.requestChangeTheme(themes.LIGHT)}>Swap Theme</Button>);
+  }
+}
+
+// provides your component with the `requestChangeTheme` prop
+export default withThemeChanger(YourComponent);
 ```
 
-If the value given to `changeTheme` is null and there are only 2 registered themes, the button will switch between the two themes.
+If the value given to `requestThemeChange` is null the application will load the next stored theme.
 
 ## That's It!

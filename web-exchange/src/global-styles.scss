@@ -7,4 +7,16 @@
 /* stylelint-enable */
 @include build-themes();
 
-$dolomite-main-font: 'Quicksand';
+$dolomite-main-font: Open Sans, sans-serif;
+$dolomite-secondary-font: Quicksand, sans-serif;
+
+@function font($type) {
+  @if $type == main {
+    @return $dolomite-main-font;
+  } @else if $type == secondary {
+    @return $dolomite-secondary-font;
+  }
+}
+
+$dolomite-width-tablet: 949px;
+$dolomite-width-mobile: 550px;

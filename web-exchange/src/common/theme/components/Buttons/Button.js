@@ -17,10 +17,13 @@ const styles = (forTheme, colors) => ({
       dark: `${colors.primary.dark} !important`,
       light: 'white'
     }),
-    fontWeight: forTheme({
-      dark: '600',
-      light: '500'
-    }),
+    fontWeight: forTheme(
+      {
+        dark: '600',
+        light: '500'
+      },
+      '500'
+    ),
     height: 48,
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba(70, 70, 70, .10)'

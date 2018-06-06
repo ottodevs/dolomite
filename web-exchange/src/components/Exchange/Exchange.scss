@@ -1,0 +1,10 @@
+@import '../../global-styles';
+
+.bigText {
+  color: color(text, secondary);
+  font-family: font(secondary);
+  font-size: 60px;
+  font-weight: '800';
+  margin-top: 250px;
+  text-align: center;
+}

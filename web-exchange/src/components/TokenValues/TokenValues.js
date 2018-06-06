@@ -3,7 +3,7 @@ import React from 'react';
 import TokenValue from './TokenValue/TokenValue';
 import withTokenInfo from '../../common/hoc/withTokenInfo';
 
-export const TokenValues = (props) => {
+export const TokenValues = props => {
   const tokens = Object.keys(props.tokenToUsd);
   const tokenValues = tokens.map(token => (
     <TokenValue
@@ -13,11 +13,7 @@ export const TokenValues = (props) => {
     />
   ));
 
-  return (
-    <React.Fragment>
-      {tokenValues}
-    </React.Fragment>
-  );
+  return <React.Fragment>{tokenValues}</React.Fragment>;
 };
 
 TokenValues.defaultProps = {
